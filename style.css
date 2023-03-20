@@ -1,4 +1,4 @@
-body {
+body,h1,p {
     margin: 0;
 }
 nav {
@@ -6,7 +6,24 @@ nav {
     background-color: grey;
 }
 
-h1 {
-    margin: 0;
+#main {
+    display: flex;
+}
+
+#main .container {
+    height: 200px;
+    flex-grow: 1;
+    background-color: rgb(160, 160, 160);
+}
+
+#canvass.container {
+    background-color: whitesmoke;
+    display: flex;
+}
+
+.pixel {
+    background-color: black;
+    width: 20px;
+    height: 20px;
 }
 

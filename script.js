@@ -1,5 +1,17 @@
-function create16X16div () {
+const main = document.querySelector('#canvass.container');
+
+
+function pixel () {
     const pixel = document.createElement('div');
-    pixel.style.width = "20px";
-    pixel.style.height = "20px";
+    pixel.classList.add('pixel')
+    main.appendChild(pixel);
 }
+
+function grid (x = 16) {
+
+    for(let i = 1; i <= x; i++){
+        pixel();
+    }
+}
+
+grid();
