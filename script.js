@@ -9,7 +9,10 @@ function grid (x = 16) {
 
         for(let j = 1; j <= x; j++) {
             const pixel = document.createElement('div');
-            pixel.classList.add('pixel')
+            pixel.addEventListener('mouseover', () =>  {
+                pixel.style.backgroundColor = 'black';
+            });
+            pixel.classList.add('pixel');
             row.appendChild(pixel);
         }
     }

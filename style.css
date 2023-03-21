@@ -21,14 +21,13 @@ nav {
 }
 
 .row {
-    background-color: lightblue;
     height: 20px;
     width: 320px;
     display: flex;
 }
 
 .pixel {
-    background-color: black;
+    background-color: white;
     width: 20px;
     height: 20px;
 }
