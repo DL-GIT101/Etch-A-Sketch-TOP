@@ -1,4 +1,4 @@
-const main = document.querySelector('#canvass.container');
+const main = document.querySelector('#canvass');
 
 
 function pixel () {
@@ -11,6 +11,7 @@ function grid (x = 16) {
 
     for(let i = 1; i <= x; i++){
         pixel();
+        
     }
 }
 

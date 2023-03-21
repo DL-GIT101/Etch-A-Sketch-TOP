@@ -16,7 +16,7 @@ nav {
     background-color: rgb(160, 160, 160);
 }
 
-#canvass.container {
+#canvass {
     background-color: whitesmoke;
     display: flex;
 }
