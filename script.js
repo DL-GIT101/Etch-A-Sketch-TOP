@@ -18,4 +18,10 @@ function grid (x = 16) {
     }
 }
 
+const button = document.querySelector('button');
+button.addEventListener('click', () => {
+    let number = prompt('How many square per side?');
+    grid(number);
+});
+
 grid();
