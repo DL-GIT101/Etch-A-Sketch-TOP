@@ -11,13 +11,19 @@ nav {
 }
 
 #main .container {
-    height: 200px;
     flex-grow: 1;
     background-color: rgb(160, 160, 160);
 }
 
 #canvass {
     background-color: whitesmoke;
+    
+}
+
+.row {
+    background-color: lightblue;
+    height: 20px;
+    width: 320px;
     display: flex;
 }
 
