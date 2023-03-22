@@ -17,18 +17,20 @@ nav {
 
 #canvass {
     background-color: whitesmoke;
-    
+    width: 720px;
+    height: 720px;
+    display: flex;
+    flex-direction: column;
 }
 
 .row {
-    height: 20px;
-    width: 320px;
     display: flex;
+    flex-basis: 480px;
 }
 
 .pixel {
     background-color: white;
-    width: 20px;
-    height: 20px;
+    outline: 1px solid black;
+    flex-basis: 720px;
 }
 
