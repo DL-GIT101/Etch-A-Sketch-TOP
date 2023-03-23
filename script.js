@@ -2,9 +2,6 @@ const main = document.querySelector('#canvass');
 
 function grid (x = 16) {
 
-    if( x > 100){
-        alert(`Computer can't process more than 100x100 pixels`);
-    } else {
         for(let i = 1; i <= x; i++){
             const row = document.createElement('div');
             row.classList.add('row')
@@ -19,7 +16,6 @@ function grid (x = 16) {
                 row.appendChild(pixel);
             }
         }
-    }
 }
 
 function removePixel(canvass) {
@@ -28,11 +24,15 @@ function removePixel(canvass) {
     }
 }
 
-const button = document.querySelector('button');
+const button = document.querySelector('#perSide');
 button.addEventListener('click', () => {
     let number = prompt('How many square per side? Max - 100');
-    if(number == null || number == ""){
-        alert("You canceled");
+    number = Number(number);
+    console.log(number);
+    if(number == 0 || number == "" || isNaN(number)){
+        alert("Canceled");
+    } else if (number > 100){
+        alert(`Computer can't process more than 100x100 pixels`);
     } else {
         removePixel(main);
         grid(number);
@@ -40,3 +40,14 @@ button.addEventListener('click', () => {
 });
 
 grid();
+
+const rainbow = document.querySelector('#rainbow');
+rainbow.addEventListener('click', () => {
+    const pixel = document.getElementsByClassName('pixel');
+
+        for(let i = 0; i< pixel.length; i++){
+            pixel[i].addEventListener('mouseover',() => {
+                pixel[i].style.backgroundColor = 'white';
+            });
+        }
+});

@@ -13,6 +13,9 @@ nav {
 #main .container {
     flex-grow: 1;
     background-color: rgb(160, 160, 160);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #canvass {
@@ -25,7 +28,7 @@ nav {
 
 .row {
     display: flex;
-    flex-basis: 480px;
+    flex-basis: 720px;
 }
 
 .pixel {
@@ -34,3 +37,8 @@ nav {
     flex-basis: 720px;
 }
 
+.container #rainbow {
+    background-image: linear-gradient(to right, red,orange,yellow,green,blue,indigo,violet);
+    text-shadow: 2px 2px 4px #000000;
+    color: white;
+}
