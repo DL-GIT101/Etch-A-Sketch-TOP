@@ -37,8 +37,17 @@ nav {
     flex-basis: 720px;
 }
 
+.container #control {
+    display: flex;
+    flex-direction: column;
+}
 .container #rainbow {
     background-image: linear-gradient(to right, red,orange,yellow,green,blue,indigo,violet);
     text-shadow: 2px 2px 4px #000000;
+    color: white;
+}
+
+.container #black {
+    background-color: black;
     color: white;
 }
