@@ -10,7 +10,7 @@ function grid (x = 16) {
             for(let j = 1; j <= x; j++) {
                 const pixel = document.createElement('div');
                 pixel.addEventListener('mouseover', () =>  {
-                    pixel.style.backgroundColor = 'black';
+                    pixel.style.backgroundColor = 'rgb(0,0,0)';
                 });
                 pixel.classList.add('pixel');
                 row.appendChild(pixel);
@@ -63,7 +63,7 @@ rainbow.addEventListener('click', () => {
                 let blue = Math.floor(Math.random() * 255) + 1;
                 let green = Math.floor(Math.random() * 255) + 1;
 
-                pixel[i].style.cssText = `background-color:rgb(${red}, ${blue}, ${green});`;
+             pixel[i].style.backgroundColor = `rgb(${red}, ${blue}, ${green})`;
             });
         }
 });
@@ -89,9 +89,11 @@ darker.addEventListener('click', () => {
                 let hslBgcolor = RGBToHSL(rbgBGColor);
                 let h = hslBgcolor[0],
                     s = hslBgcolor[1],
-                    l = hslBgcolor[2]-10;
-                    console.log(l);
-                pixel[i].style.cssText = `background-color:hsl(${h},${s}%,${l}%);`;
+                    l = hslBgcolor[2]+10;
+                console.log(rbgBGColor);
+                console.log(hslBgcolor);
+              let haha = pixel[i].style.backgroundColor = `hsl(${h},${s}%,${l}%)`;
+              console.log(haha);
             });
         }
 });
@@ -148,7 +150,7 @@ function RGBToHSL(rgb) {
         
     // Multiply l and s by 100
     s = +(s * 100).toFixed(1);
-    l = +(l * 100).toFixed(1) + 10;
+    l = +(l * 100).toFixed(1);
 
     return [h, s, l];
   }
