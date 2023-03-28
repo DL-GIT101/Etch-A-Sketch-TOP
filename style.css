@@ -26,17 +26,6 @@ nav {
     flex-direction: column;
 }
 
-.row {
-    display: flex;
-    flex-basis: 720px;
-}
-
-.pixel {
-    background-color: white;
-    outline: 1px solid black;
-    flex-basis: 720px;
-}
-
 .container #control {
     display: flex;
     flex-direction: column;
@@ -47,7 +36,7 @@ nav {
     color: white;
 }
 
-.container #black {
+.container #ink {
     background-color: black;
     color: white;
 }
