@@ -40,3 +40,12 @@ nav {
     background-color: black;
     color: white;
 }
+
+.container #eraser {
+    background-color: whitesmoke;
+}
+
+.container #darker {
+    background-color: grey;
+    color: white;
+}

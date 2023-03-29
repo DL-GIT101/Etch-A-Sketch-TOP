@@ -1,4 +1,5 @@
 const canvass = document.querySelector('#canvass');
+canvass.addEventListener('mouseleave', mouseUp);
 let isDown = false;
 // append divs 
 function grid (x = 16) {
@@ -88,6 +89,28 @@ rainbowBTN.addEventListener('click', () => {
         }
 });
 
+const darkerBTN = document.querySelector('#darker');
+darkerBTN.addEventListener('click', () => {
+    let pixels = document.getElementsByClassName('pixel');
+        for(let pixel of pixels){
+            removeEvent(pixel);
+            pixel.addEventListener('mousedown',darker);
+            pixel.addEventListener('mouseover',darker);
+            pixel.addEventListener('click', darkerClick);
+        }
+});
+
+const lighterBTN = document.querySelector('#lighter');
+lighterBTN.addEventListener('click', () => {
+    let pixels = document.getElementsByClassName('pixel');
+        for(let pixel of pixels){
+            removeEvent(pixel);
+            pixel.addEventListener('mousedown',lighter);
+            pixel.addEventListener('mouseover',lighter);
+            pixel.addEventListener('click', lighterClick);
+        }
+});
+
 function makeInk(e){
     if(isDown == true){
     e.target.style.backgroundColor = "hsl(0,0%,0%)";
@@ -111,15 +134,45 @@ function eraserClick (e){
 function rainbow(e){
     if(isDown == true){
         let h = Math.floor(Math.random() * 360);
-        e.target.style.backgroundColor = `hsl(${h},100%,50%)`;
+        let s = Math.floor(Math.random() * (100 - 30)) + 30;
+        let l = Math.floor(Math.random() * (90 - 30)) + 30;
+        e.target.style.backgroundColor = `hsl(${h},${s}%,${l}%)`;
         }
 };
 
 function rainbowClick(e){
-    if(isDown == true){
         let h = Math.floor(Math.random() * 360);
-        e.target.style.backgroundColor = `hsl(${h},100%,50%)`;
-        }
+        let s = Math.floor(Math.random() * (100 - 30)) + 30;
+        let l = Math.floor(Math.random() * (90 - 30)) + 30;
+        e.target.style.backgroundColor = `hsl(${h},${s}%,${l}%)`;
+};
+
+function darker(e){
+    if(isDown == true){
+    let bg = e.target.style.backgroundColor;
+        bg = RGBToHSL(bg,"dark");
+    e.target.style.backgroundColor = bg;
+    }
+};
+
+function darkerClick(e){
+    let bg = e.target.style.backgroundColor;
+        bg = RGBToHSL(bg,"dark");
+    e.target.style.backgroundColor = bg;
+};
+
+function lighter(e){
+    if(isDown == true){
+    let bg = e.target.style.backgroundColor;
+        bg = RGBToHSL(bg,"light");
+    e.target.style.backgroundColor = bg;
+    }
+};
+
+function lighterClick(e){
+    let bg = e.target.style.backgroundColor;
+        bg = RGBToHSL(bg,"light");
+    e.target.style.backgroundColor = bg;
 };
 
 function removeEvent(pixel){
@@ -135,5 +188,74 @@ function removeEvent(pixel){
     pixel.removeEventListener('mouseover',rainbow);
     pixel.removeEventListener('click',rainbowClick);
 
-    console.log("removed");
+    pixel.removeEventListener('mousedown',darker);
+    pixel.removeEventListener('mouseover',darker);
+    pixel.removeEventListener('click', darkerClick);
+
+    pixel.removeEventListener('mousedown',lighter);
+    pixel.removeEventListener('mouseover',lighter);
+    pixel.removeEventListener('click', lighterClick);
 };
+
+function RGBToHSL(rgb,lightness) {
+    let sep = rgb.indexOf(",") > -1 ? "," : " ";
+    rgb = rgb.substr(4).split(")")[0].split(sep);
+  
+    for (let R in rgb) {
+      let r = rgb[R];
+      if (r.indexOf("%") > -1) 
+        rgb[R] = Math.round(r.substr(0,r.length - 1) / 100 * 255);
+    }
+  
+    // Make r, g, and b fractions of 1
+    let r = rgb[0] / 255,
+        g = rgb[1] / 255,
+        b = rgb[2] / 255;
+  
+     // Find greatest and smallest channel values
+    let cmin = Math.min(r,g,b),
+    cmax = Math.max(r,g,b),
+    delta = cmax - cmin,
+    h = 0,
+    s = 0,
+    l = 0;
+
+    // Calculate hue
+    // No difference
+    if (delta == 0)
+    h = 0;
+    // Red is max
+    else if (cmax == r)
+    h = ((g - b) / delta) % 6;
+    // Green is max
+    else if (cmax == g)
+    h = (b - r) / delta + 2;
+    // Blue is max
+    else
+    h = (r - g) / delta + 4;
+
+    h = Math.round(h * 60);
+    
+    // Make negative hues positive behind 360°
+    if (h < 0)
+        h += 360;
+    
+    // Calculate lightness
+    l = (cmax + cmin) / 2;
+
+    // Calculate saturation
+    s = delta == 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
+        
+    // Multiply l and s by 100
+    s = +(s * 100).toFixed(1);
+
+    if(lightness == "dark"){
+        l -= .1;
+    }else if(lightness == "light") {
+        l += .1;
+    }
+
+    l = +(l * 100).toFixed(1);
+
+    return "hsl(" + h + "," + s + "%," + l + "%)";
+  }
