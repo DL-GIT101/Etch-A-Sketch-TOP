@@ -15,7 +15,8 @@ function grid (x = 16) {
             pixel.style.cssText = 'background-color:hsl(0,0%,100%); flex-basis:720px; outline: 1px solid grey';
             pixel.addEventListener('mousedown', mouseDown);
             pixel.addEventListener('mouseup', mouseUp);
-            pixel.addEventListener('mousemove',makeInk);
+            pixel.addEventListener('mousedown',makeInk);
+            pixel.addEventListener('mouseover',makeInk);
             pixel.addEventListener('click',makeInkClick);
             row.appendChild(pixel);
         }
@@ -59,7 +60,8 @@ inkBTN.addEventListener('click', () => {
     let pixels = document.getElementsByClassName('pixel');
         for(let pixel of pixels){
             removeEvent(pixel);
-            pixel.addEventListener('mousemove',makeInk);
+            pixel.addEventListener('mousedown',makeInk);
+            pixel.addEventListener('mouseover',makeInk);
             pixel.addEventListener('click',makeInkClick);
         }
 });
@@ -69,8 +71,20 @@ eraserBTN.addEventListener('click', () => {
     let pixels = document.getElementsByClassName('pixel');
         for(let pixel of pixels){
             removeEvent(pixel);
-            pixel.addEventListener('mousemove',eraser);
+            pixel.addEventListener('mousedown',eraser);
+            pixel.addEventListener('mouseover',eraser);
             pixel.addEventListener('click',eraserClick);
+        }
+});
+
+const rainbowBTN = document.querySelector('#rainbow');
+rainbowBTN.addEventListener('click', () => {
+    let pixels = document.getElementsByClassName('pixel');
+        for(let pixel of pixels){
+            removeEvent(pixel);
+            pixel.addEventListener('mousedown',rainbow);
+            pixel.addEventListener('mouseover',rainbow);
+            pixel.addEventListener('click',rainbowClick);
         }
 });
 
@@ -94,10 +108,32 @@ function eraserClick (e){
     e.target.style.backgroundColor = "hsl(0,0%,100%)";
 };
 
+function rainbow(e){
+    if(isDown == true){
+        let h = Math.floor(Math.random() * 360);
+        e.target.style.backgroundColor = `hsl(${h},100%,50%)`;
+        }
+};
+
+function rainbowClick(e){
+    if(isDown == true){
+        let h = Math.floor(Math.random() * 360);
+        e.target.style.backgroundColor = `hsl(${h},100%,50%)`;
+        }
+};
+
 function removeEvent(pixel){
-    pixel.removeEventListener('mousemove',makeInk);
+    pixel.removeEventListener('mousedown',makeInk);
+    pixel.removeEventListener('mouseover',makeInk);
     pixel.removeEventListener('click',makeInkClick);
-    pixel.removeEventListener('mousemove',eraser);
+
+    pixel.removeEventListener('mousedown',eraser);
+    pixel.removeEventListener('mouseover',eraser);
     pixel.removeEventListener('click',eraserClick);
+
+    pixel.removeEventListener('mousedown',rainbow);
+    pixel.removeEventListener('mouseover',rainbow);
+    pixel.removeEventListener('click',rainbowClick);
+
     console.log("removed");
 };
