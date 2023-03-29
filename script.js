@@ -1,5 +1,4 @@
 const canvass = document.querySelector('#canvass');
-canvass.addEventListener('mouseleave', mouseUp);
 let isDown = false;
 // append divs 
 function grid (x = 16) {
@@ -16,6 +15,8 @@ function grid (x = 16) {
             pixel.style.cssText = 'background-color:hsl(0,0%,100%); flex-basis:720px; outline: 1px solid grey';
             pixel.addEventListener('mousedown', mouseDown);
             pixel.addEventListener('mouseup', mouseUp);
+            pixel.addEventListener('mousemove',makeInk);
+            pixel.addEventListener('click',makeInkClick);
             row.appendChild(pixel);
         }
     }
@@ -57,12 +58,46 @@ const inkBTN = document.querySelector('#ink');
 inkBTN.addEventListener('click', () => {
     let pixels = document.getElementsByClassName('pixel');
         for(let pixel of pixels){
+            removeEvent(pixel);
             pixel.addEventListener('mousemove',makeInk);
+            pixel.addEventListener('click',makeInkClick);
         }
-} );
+});
 
-const makeInk = e => {
+const eraserBTN = document.querySelector('#eraser');
+eraserBTN.addEventListener('click', () => {
+    let pixels = document.getElementsByClassName('pixel');
+        for(let pixel of pixels){
+            removeEvent(pixel);
+            pixel.addEventListener('mousemove',eraser);
+            pixel.addEventListener('click',eraserClick);
+        }
+});
+
+function makeInk(e){
     if(isDown == true){
     e.target.style.backgroundColor = "hsl(0,0%,0%)";
     }
+};
+
+function makeInkClick (e){
+    e.target.style.backgroundColor = "hsl(0,0%,0%)";
+};
+
+function eraser(e){
+    if(isDown == true){
+        e.target.style.backgroundColor = "hsl(0,0%,100%)";
+        }
+};
+
+function eraserClick (e){
+    e.target.style.backgroundColor = "hsl(0,0%,100%)";
+};
+
+function removeEvent(pixel){
+    pixel.removeEventListener('mousemove',makeInk);
+    pixel.removeEventListener('click',makeInkClick);
+    pixel.removeEventListener('mousemove',eraser);
+    pixel.removeEventListener('click',eraserClick);
+    console.log("removed");
 };
